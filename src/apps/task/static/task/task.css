@@ -1,0 +1,218 @@
+/* Общие стили страницы */
+body {
+    background-color: #f8f9fa;
+    font-family: Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Ссылки */
+a {
+    color: black;
+    padding: 10px;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #007bff;
+}
+
+/* Навигация */
+nav {
+    background-color: #343a40;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    padding: 15px;
+}
+
+nav a {
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+nav a:hover {
+    background-color: #495057;
+    transform: scale(1.05);
+}
+
+/* Заголовки */
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: .5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    color: #333; /* Из transaction.css */
+}
+
+/* Баланс (balance-card) */
+.balance-card {
+    background: linear-gradient(135deg, #007bff, #0056b3); /* Из transaction.css */
+    color: white;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px; /* Добавлено для консистентности */
+}
+
+.balance-card h5 {
+    margin: 0;
+    font-size: 1.2rem; /* Из transaction.css */
+}
+
+/* Контейнер формы */
+.form-container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Из transaction.css */
+    padding: 20px;
+    margin-bottom: 40px;
+}
+
+/* Поля формы */
+.task-form .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.task-form .form-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.task-form input,
+.task-form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px; /* Из transaction.css для кнопок и аккордеона */
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.task-form input:focus,
+.task-form select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+.task-form .error-message {
+    color: #721c24;
+    background-color: #f8d7da;
+    padding: 5px 10px;
+    border-radius: 4px;
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+/* Кнопка формы */
+.form-submit {
+    background-color: #007bff;
+    border: none;
+    border-radius: 8px; /* Из transaction.css */
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 12px 20px; /* Из transaction.css */
+    width: 100%;
+    transition: background-color 0.3s, transform 0.2s; /* Из transaction.css */
+}
+
+.form-submit:hover {
+    background-color: #0056b3;
+    transform: scale(1.05); /* Из transaction.css */
+}
+
+/* Карточки задач (уникальные для task) */
+.task-card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Из transaction.css для таблиц */
+    border-radius: 8px; /* Добавлено для консистентности */
+    transition: transform 0.2s;
+    background: white; /* Из transaction.css для таблиц */
+}
+
+.task-card:hover {
+    transform: translateY(-5px);
+}
+
+.task-card .card-title {
+    color: #333;
+    font-size: 1rem; /* Уменьшаем шрифт заголовка */
+    margin-bottom: 5px; /* Уменьшаем отступ снизу */
+}
+
+.task-card .card-text {
+    color: #666;
+    font-size: 0.9rem; /* Уменьшаем шрифт текста */
+    margin-bottom: 5px; /* Уменьшаем отступ */
+}
+
+/* Card-body */
+.card-body {
+    flex: 1 1 auto;
+    color: black;
+    background-color: white;
+    padding: 5px; /* Ещё уменьшаем padding */
+    font-size: 0.9rem; /* Уменьшаем базовый размер шрифта внутри */
+    line-height: 1.2; /* Уменьшаем межстрочный интервал */
+}
+
+/* Прогресс-бар (уникальный для task) */
+.progress {
+    height: 12px; /* Уменьшаем высоту прогресс-бара */
+    border-radius: 5px; /* Уменьшаем радиус для компактности */
+    overflow: hidden;
+    margin-bottom: 5px; /* Уменьшаем отступ снизу */
+}
+
+.progress-bar {
+    font-weight: bold;
+    font-size: 0.7rem; /* Уменьшаем шрифт внутри прогресс-бара */
+}
+
+/* Сообщение об отсутствии задач (уникальное для task) */
+.empty-message {
+    color: #666;
+    font-style: italic;
+}
+
+/* Кнопки действий */
+.task-card .btn-sm {
+    padding: 0.15rem 0.3rem; /* Уменьшаем padding кнопок */
+    border-radius: 8px; /* Из transaction.css */
+    margin-right: 3px; /* Уменьшаем расстояние между кнопками */
+    color: white; /* Из transaction.css для .action-buttons a */
+    font-size: 0.8rem; /* Уменьшаем шрифт кнопок */
+    transition: background-color 0.3s, transform 0.2s; /* Из transaction.css */
+}
+
+.task-card .btn-sm:hover {
+    transform: scale(1.05); /* Из transaction.css */
+}
+
+/* Сообщения */
+.messages {
+    margin-bottom: 20px;
+}
+
+.alert {
+    border-radius: 8px; /* Из transaction.css для кнопок и аккордеона */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Из transaction.css для таблиц */
+}
+
+.transaction-date div {
+        line-height: 1.2;
+        font-size: 0.9em;
+}
+
+.transaction-date div:first-child {
+        font-weight: bold;
+}

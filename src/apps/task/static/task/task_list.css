@@ -1,0 +1,211 @@
+/* Общие стили страницы */
+body {
+    background-color: #f8f9fa;
+    font-family: Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Ссылки */
+a {
+    color: black;
+    padding: 10px;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #007bff;
+}
+
+/* Навигация */
+nav {
+    background-color: #343a40;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    padding: 15px;
+}
+
+nav a {
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+nav a:hover {
+    background-color: #495057;
+    transform: scale(1.05);
+}
+
+/* Заголовки */
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: .5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    color: #333;
+}
+
+/* Таблица */
+.table-responsive {
+    width: 100%; /* Растягиваем контейнер на весь экран */
+    margin: 0; /* Убираем отступы */
+}
+
+.table {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Для скругления углов */
+    background: white;
+    width: 100%; /* Таблица на всю ширину */
+    margin: 0; /* Убираем отступы */
+}
+
+.table thead th {
+    background-color: #343a40; /* Тёмный фон заголовков */
+    color: white;
+    border: none;
+    cursor: pointer; /* Указатель для сортировки */
+    position: relative;
+    padding: 10px;
+    text-align: center; /* Центрирование заголовков */
+}
+
+.table thead th:hover {
+    background-color: #495057; /* Цвет при наведении */
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f8f9fa; /* Светлый фон для чётных строк */
+}
+
+.table-hover tbody tr:hover {
+    background-color: #e9ecef; /* Цвет при наведении */
+}
+
+.table td, .table th {
+    vertical-align: middle; /* Выравнивание содержимого по центру */
+    padding: 10px; /* Отступы внутри ячеек */
+    text-align: center; /* Центрирование текста */
+}
+
+/* Сортировка в заголовках */
+.table thead th a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 0 20px; /* Дополнительное пространство для стрелок */
+}
+
+.table thead th a:hover {
+    color: #ccc; /* Светлее при наведении */
+}
+
+.table thead th .sort-arrow {
+    position: absolute;
+    right: 5px;
+    font-size: 12px;
+}
+
+.table thead th .sort-arrow.asc::after {
+    content: "↑";
+}
+
+.table thead th .sort-arrow.desc::after {
+    content: "↓";
+}
+
+/* Прогресс-бар в таблице */
+.progress {
+    height: 15px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0 auto; /* Центрирование */
+    width: 80%; /* Ограничение ширины */
+}
+
+.progress-bar {
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.bg-success {
+    background-color: #28a745; /* Зелёный для накоплений */
+}
+
+.bg-danger {
+    background-color: #dc3545; /* Красный для долгов */
+}
+
+/* Кнопки действий в таблице */
+.table .btn-sm {
+    padding: 0.2rem 0.4rem;
+    border-radius: 8px;
+    margin-right: 5px;
+    color: white; /* Чёрный текст */
+    font-size: 0.8rem;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.table .btn-sm:hover {
+    transform: scale(1.05);
+}
+
+.btn-warning {
+    background-color: #ffc107; /* Жёлтый для "Редактировать" */
+}
+
+.btn-danger {
+    background-color: #dc3545; /* Красный для "Удалить" */
+}
+
+.btn-success {
+    background-color: #28a745; /* Зелёный для "Завершить" */
+}
+
+/* Сообщение об отсутствии задач */
+.empty-message {
+    color: #666;
+    font-style: italic;
+    padding: 20px;
+}
+
+/* Поиск */
+.input-group .form-control {
+    border-radius: 8px 0 0 8px;
+    border: 1px solid #ddd;
+}
+
+.input-group .btn {
+    border-radius: 0 8px 8px 0;
+    background-color: #343a40; /* Тёмный фон кнопки */
+    color: white;
+}
+
+.input-group .btn:hover {
+    background-color: #495057; /* Цвет при наведении */
+}
+
+/* Сообщения */
+.messages {
+    margin-bottom: 20px;
+}
+
+.alert {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.alert-success {
+    background-color: #28a745; /* Зелёный для успеха */
+    color: white;
+}
+
+.alert-danger {
+    background-color: #dc3545; /* Красный для ошибки */
+    color: white;
+}

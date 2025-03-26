@@ -1,0 +1,241 @@
+/* static/css/base.css */
+/* Общие стили */
+body {
+    background-color: #f8f9fa;
+    font-family: Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Ссылки */
+a {
+    color: black;
+    padding: 10px;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #007bff;
+}
+
+/* Навигация */
+nav {
+    background-color: #343a40;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    padding: 15px;
+}
+
+nav a {
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+nav a:hover {
+    background-color: #495057;
+    transform: scale(1.05);
+}
+
+/* Заголовки */
+h1 {
+    color: #333;
+}
+
+/* Формы */
+.form-block {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 45%;
+}
+
+.forms-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Кнопки */
+button {
+    background-color: #007bff;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 12px 20px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.type-btn {
+    background-color: white;
+    border: 3px solid black;
+    border-radius: 8px;
+    color: black;
+    cursor: pointer;
+    padding: 10px 15px;
+}
+
+.type-btn.active[data-type="expense"] {
+    border: 2px solid #fc5151;
+}
+
+.type-btn.active[data-type="income"] {
+    border: 2px solid #51fc6d;
+}
+
+/* Таблицы */
+table {
+    background: white;
+    border-collapse: collapse;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    overflow: hidden;
+    width: 80%;
+}
+
+th,
+td {
+    border-bottom: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+th:hover {
+    background-color: #0056b3;
+}
+
+/* Стили для сортировки в заголовках таблиц */
+th a {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    display: block;
+    position: relative;
+    padding: 2px 20px;
+    transition: color 0.3s ease;
+}
+
+th a:hover {
+    color: #cce5ff;
+}
+
+th a.active {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+/* Стили для боковой панели и аккордеона */
+.sidebar {
+    background-color: #343a40;
+    color: white;
+    height: 100vh;
+    padding: 20px;
+    position: sticky;
+    top: 0;
+    width: 250px;
+}
+
+.accordion {
+    margin-bottom: 15px;
+}
+
+.accordion-item {
+    margin-bottom: 10px;
+    background-color: #495057;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.custom-accordion-btn {
+    width: 100%;
+    text-align: left;
+    background-color: #495057;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+    position: relative;
+}
+
+.custom-accordion-btn:hover {
+    background-color: #5a6268;
+}
+
+.custom-accordion-btn::after {
+    content: '▶';
+    position: absolute;
+    right: 10px;
+    font-size: 12px;
+    transition: transform 0.3s ease;
+}
+
+.custom-accordion-btn:not(.collapsed)::after {
+    transform: rotate(90deg);
+}
+
+.accordion-collapse {
+    background-color: #495057;
+    border-radius: 0 0 8px 8px;
+    transition: background-color 0.3s ease;
+}
+
+.accordion-body {
+    padding: 10px;
+}
+
+.accordion-collapse.show {
+    background-color: #5a6268;
+}
+
+/* Дополнительные стили */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.table-responsive {
+    margin-bottom: 1.5rem;
+}
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+}
+
+@media (max-width: 767.98px) {
+    .sidebar {
+        min-height: auto;
+        border-right: none;
+        border-bottom: 1px solid #dee2e6;
+    }
+}

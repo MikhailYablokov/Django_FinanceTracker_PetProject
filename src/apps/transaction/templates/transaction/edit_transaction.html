@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css_add %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+    Редактировать транзакцию - Мой проект на Django
+{% endblock %}
+
+{% block content %}
+    <div class="container py-4">
+        <h1 class="mb-4">Редактировать транзакцию</h1>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {% if message.tags == 'success' %}alert-success{% else %}alert-danger{% endif %} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="card">
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+                        <a href="{% url 'home' %}" class="btn btn-secondary">Назад к списку</a>
+                    </div>
+                </form>
+
+                {% if form.errors %}
+                    <div class="alert alert-danger mt-3">
+                        <ul class="mb-0">
+                            {% for field, errors in form.errors.items %}
+                                <li><strong>{{ field }}:</strong> {{ errors|striptags }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock %}

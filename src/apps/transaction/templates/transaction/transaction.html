@@ -1,0 +1,196 @@
+<!-- transactions/transactions.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css_add %}
+    <link rel="stylesheet" href="{% static 'transaction.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+    Финансы - Мой проект на Django
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 sidebar bg-light p-3">
+                <h4 class="mb-3">Действия</h4>
+                <div class="accordion" id="sidebarAccordion">
+                    <!-- Транзакция -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button custom-accordion-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTransaction" aria-expanded="false" aria-controls="collapseTransaction">
+                                Добавить транзакцию
+                            </button>
+                        </h2>
+                        <div id="collapseTransaction" class="accordion-collapse collapse" data-bs-parent="#sidebarAccordion">
+                            <div class="accordion-body">
+                                <form method="post">
+                                    {% csrf_token %}
+                                    {{ transaction_form.as_p }}
+                                    <button type="submit" name="submit_transaction" class="btn btn-primary w-100">Добавить</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Категория -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button custom-accordion-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCategory" aria-expanded="false" aria-controls="collapseCategory">
+                                Добавить категорию
+                            </button>
+                        </h2>
+                        <div id="collapseCategory" class="accordion-collapse collapse" data-bs-parent="#sidebarAccordion">
+                            <div class="accordion-body">
+                                <form method="post">
+                                    {% csrf_token %}
+                                    {{ category_form.as_p }}
+                                    <button type="submit" name="submit_category" class="btn btn-primary w-100">Сохранить</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Обмен валют -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button custom-accordion-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExchange" aria-expanded="false" aria-controls="collapseExchange">
+                                Обмен валют
+                            </button>
+                        </h2>
+                        <div id="collapseExchange" class="accordion-collapse collapse" data-bs-parent="#sidebarAccordion">
+                            <div class="accordion-body">
+                                <form method="post">
+                                    {% csrf_token %}
+                                    {{ exchange_form.as_p }}
+                                    <button type="submit" name="submit_exchange" class="btn btn-primary w-100">Обменять</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9 col-lg-10 content p-3">
+                <h1 class="mb-4">Финансовый учет</h1>
+
+                <!-- Сообщения -->
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert {% if message.tags == 'success' %}alert-success{% else %}alert-danger{% endif %} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                <!-- Балансы -->
+                <h2>Балансы</h2>
+                <div class="row mb-4">
+                    {% for balance in balances %}
+                        <div class="col-md-4">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    {% if is_editing and balance.currency == selected_currency %}
+                                        <form method="post">
+                                            {% csrf_token %}
+                                            {{ balance_form.as_p }}
+                                            <input type="hidden" name="currency" value="{{ balance.currency }}">
+                                            <button type="submit" name="submit_balance" class="btn btn-success">Сохранить</button>
+                                            <a href="{% url 'home' %}" class="btn btn-secondary">Отмена</a>
+                                        </form>
+                                    {% else %}
+                                        <h5 class="card-title">{{ balance.currency }}: {{ balance.amount|floatformat:2 }}</h5>
+                                        <p class="card-text text-muted">Обновлено: {{ balance.updated_at|date:"d.m.Y H:i" }}</p>
+                                        <a href="{% url 'home' %}?edit=true&currency={{ balance.currency }}" class="btn btn-sm btn-warning">Изменить</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <p class="text-muted">Балансы отсутствуют</p>
+                    {% endfor %}
+                </div>
+
+                <!-- Транзакции -->
+                <h2>Транзакции</h2>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th><a href="?sort_by=amount&order={% if sort_by == 'amount' and order == 'asc' %}desc{% else %}asc{% endif %}" class="text-white text-decoration-none">Сумма {% if sort_by == 'amount' %}{% if order == 'asc' %}↓{% else %}↑{% endif %}{% endif %}</a></th>
+                                <th><a href="?sort_by=description&order={% if sort_by == 'description' and order == 'asc' %}desc{% else %}asc{% endif %}" class="text-white text-decoration-none">Описание {% if sort_by == 'description' %}{% if order == 'asc' %}↓{% else %}↑{% endif %}{% endif %}</a></th>
+                                <th><a href="?sort_by=category__name&order={% if sort_by == 'category__name' and order == 'asc' %}desc{% else %}asc{% endif %}" class="text-white text-decoration-none">Категория {% if sort_by == 'category__name' %}{% if order == 'asc' %}↓{% else %}↑{% endif %}{% endif %}</a></th>
+                                <th><a href="?sort_by=type&order={% if sort_by == 'type' and order == 'asc' %}desc{% else %}asc{% endif %}" class="text-white text-decoration-none">Тип {% if sort_by == 'type' %}{% if order == 'asc' %}↓{% else %}↑{% endif %}{% endif %}</a></th>
+                                <th><a href="?sort_by=date&order={% if sort_by == 'date' and order == 'asc' %}desc{% else %}asc{% endif %}" class="text-white text-decoration-none">Дата {% if sort_by == 'date' %}{% if order == 'asc' %}↓{% else %}↑{% endif %}{% endif %}</a></th>
+                                <th>Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for transaction in transactions %}
+                                <tr>
+                                    <td>{{ transaction.amount|floatformat:2 }} {{ transaction.balance.currency }}</td>
+                                    <td>{{ transaction.description|default:"—" }}</td>
+                                    <td>{{ transaction.category.name|default:"—" }}</td>
+                                    <td>{{ transaction.get_type_display }}</td>
+                                    <td>{{ transaction.date|date:"d.m.Y" }}</td>
+                                    <td class="action-buttons">
+                                        <a href="{% url 'edit_transaction' transaction.id %}" class="btn btn-sm btn-warning">Редактировать</a>
+                                        <a href="{% url 'delete_transaction' transaction.id %}" class="btn btn-sm btn-danger">Удалить</a>
+                                    </td>
+                                </tr>
+                            {% empty %}
+                                <tr><td colspan="6" class="text-center">Транзакции отсутствуют</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Категории -->
+                <h2>Категории</h2>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Название</th>
+                                <th>Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for category in categories %}
+                                <tr>
+                                    <td>{{ category.name }}</td>
+                                    <td class="action-buttons">
+                                        <a href="{% url 'delete_category' category.id %}" class="btn btn-sm btn-danger">Удалить</a>
+                                    </td>
+                                </tr>
+                            {% empty %}
+                                <tr><td colspan="2" class="text-center">Категории отсутствуют</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.action-buttons a').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const collapses = document.querySelectorAll('.accordion-collapse');
+            collapses.forEach(collapse => {
+                collapse.classList.remove('show');
+            });
+        });
+    </script>
+{% endblock %}

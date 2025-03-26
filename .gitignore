@@ -1,0 +1,51 @@
+# Виртуальное окружение
+venv/
+env/
+.env
+
+# Файлы Python
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+
+# Локальные настройки и базы данных
+*.sqlite3
+db.sqlite3
+local_settings.py
+
+# Статические и медиа файлы (если они генерируются или загружаются локально)
+staticfiles/
+media/
+
+# Логи
+*.log
+
+# Файлы редакторов и IDE
+.idea/
+.vscode/
+*.sublime-workspace
+
+# Временные файлы и кэш
+*.bak
+*.swp
+*~
+.cache/
+
+# Зависимости, установленные через npm (если используются)
+node_modules/
+
+# Файлы миграций (опционально, если не хотите их коммитить)
+*/migrations/*
+!*/migrations/__init__.py
+
+# Секреты и конфиденциальные данные
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+secrets.json

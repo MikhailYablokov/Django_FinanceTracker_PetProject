@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css_add %}
+    <link rel="stylesheet" href="{% static 'task/task_list.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid mt-4">
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="alert {% if message.tags == 'success' %}alert-success{% else %}alert-danger{% endif %} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <h1 class="mb-4">Все задачи</h1>
+        <form method="get" class="mb-4">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" placeholder="Поиск по названию" value="{{ search }}">
+                <input type="hidden" name="sort_by" value="{{ sort_by }}">
+                <button type="submit" class="btn btn-primary">Найти</button>
+            </div>
+        </form>
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            <a href="?sort_by={% if sort_by == 'title' %}-title{% else %}title{% endif %}&search={{ search|default:'' }}">Название
+                                {% if sort_by == 'title' %}<span class="sort-arrow asc"></span>{% elif sort_by == '-title' %}<span class="sort-arrow desc"></span>{% endif %}
+                            </a>
+                        </th>
+                        <th>
+                            <a href="?sort_by={% if sort_by == 'goal_type' %}-goal_type{% else %}goal_type{% endif %}&search={{ search|default:'' }}">Тип
+                                {% if sort_by == 'goal_type' %}<span class="sort-arrow asc"></span>{% elif sort_by == '-goal_type' %}<span class="sort-arrow desc"></span>{% endif %}
+                            </a>
+                        </th>
+                        <th>
+                            <a href="?sort_by={% if sort_by == 'amount' %}-amount{% else %}amount{% endif %}&search={{ search|default:'' }}">Цель
+                                {% if sort_by == 'amount' %}<span class="sort-arrow asc"></span>{% elif sort_by == '-amount' %}<span class="sort-arrow desc"></span>{% endif %}
+                            </a>
+                        </th>
+                        <th>Прогресс</th>
+                        <th>
+                            <a href="?sort_by={% if sort_by == 'completed_date' %}-completed_date{% else %}completed_date{% endif %}&search={{ search|default:'' }}">Завершено
+                                {% if sort_by == 'completed_date' %}<span class="sort-arrow asc"></span>{% elif sort_by == '-completed_date' %}<span class="sort-arrow desc"></span>{% endif %}
+                            </a>
+                        </th>
+                        <th>Действия</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for task in tasks %}
+                        <tr>
+                            <td>{{ task.title }}</td>
+                            <td>{{ task.get_goal_type_display }}</td>
+                            <td>{{ task.amount|floatformat:2 }} {{ task.get_currency_display }}</td>
+                            <td>
+                                {% if not task.completed %}
+                                    <div class="progress">
+                                        <div class="progress-bar {% if task.goal_type == 'save' %}bg-success{% else %}bg-danger{% endif %}" role="progressbar"
+                                             style="width: {{ task.progress }}%"
+                                             aria-valuenow="{{ task.progress }}"
+                                             aria-valuemin="0"
+                                             aria-valuemax="100">
+                                            {{ task.progress|floatformat:0 }}%
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    —
+                                {% endif %}
+                            </td>
+                            <td>{{ task.completed_date|date:"d.m.Y"|default:"—" }}</td>
+                            <td>
+                                {% if not task.completed %}
+                                    <a href="{% url 'edit_task' task.id %}?next={% url 'task_list' %}&search={{ search|default:'' }}&sort_by={{ sort_by }}" class="btn btn-sm btn-warning">Редактировать</a>
+                                    <a href="{% url 'delete_task' task.id %}?next={% url 'task_list' %}&search={{ search|default:'' }}&sort_by={{ sort_by }}" class="btn btn-sm btn-danger">Удалить</a>
+                                    <a href="{% url 'complete_task' task.id %}?next={% url 'task_list' %}&search={{ search|default:'' }}&sort_by={{ sort_by }}" class="btn btn-sm btn-success">Завершить</a>
+                                {% else %}
+                                    <a href="{% url 'delete_task' task.id %}?next={% url 'task_list' %}&search={{ search|default:'' }}&sort_by={{ sort_by }}" class="btn btn-sm btn-danger">Удалить</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="6" class="empty-message">Задачи не найдены</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js_add %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock %}

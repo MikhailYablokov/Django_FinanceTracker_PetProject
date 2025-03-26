@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block css_add %}
+    <link rel="stylesheet" href=" {% static 'css/base.css' %}">
+{% endblock %}
+
+
+{% block title %}
+    Неизвестная страница - Мой Django проект
+{% endblock %}
+
+
+{% block content %}
+<header>
+        <h1>Страница не найдена!</h1>
+    </header>
+    <main>
+        <p>Вы перешли по неизвестному URL</p>
+        <a href="/">На главную</a>
+    </main>
+{% endblock %}
