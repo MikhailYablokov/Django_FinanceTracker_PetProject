@@ -28,23 +28,23 @@
 1. Клонируйте репозиторий:
    git clone https://github.com/MikhailYablokov/Django_FinanceTracker_PetProject.git
 
-2. Перейдите в директорию проекта:
-   cd financial-tracker
-
-3. Создайте и активируйте виртуальное окружение:
+2. Создайте и активируйте виртуальное окружение:
    python -m venv venv
    source venv/bin/activate  # Для Windows: venv\Scripts\activate
 
-4. Установите зависимости:
+3. Установите зависимости:
    pip install -r requirements.txt
+   
+4. Перейдите в директорию проекта:
+   cd src
 
-5. Примените миграции:
+6. Примените миграции:
    python manage.py migrate
 
-6. Запустите сервер разработки:
+7. Запустите сервер разработки:
    python manage.py runserver
 
-7. Откройте в браузере: http://localhost:8000
+8. Откройте в браузере: http://localhost:8000
 
 
 # English Version
@@ -75,15 +75,15 @@ Financial Tracker is a Django-based web application designed for effective perso
 1. Clone the repository:
    git clone https://github.com/MikhailYablokov/Django_FinanceTracker_PetProject.git
 
-2. Navigate to the project directory:
-   cd financial-tracker
-
-3. Create and activate a virtual environment:
+2. Create and activate a virtual environment:
    python -m venv venv
    source venv/bin/activate  # For Windows: venv\Scripts\activate
 
-4. Install dependencies:
+3. Install dependencies:
    pip install -r requirements.txt
+
+4. Navigate to the project directory:
+   cd src
 
 5. Apply migrations:
    python manage.py migrate
