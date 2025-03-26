@@ -26,7 +26,7 @@
 ## Установка и запуск
 
 1. Клонируйте репозиторий:
-   git clone https://github.com/your-username/financial-tracker.git
+   git clone https://github.com/MikhailYablokov/Django_FinanceTracker_PetProject.git
 
 2. Перейдите в директорию проекта:
    cd financial-tracker
@@ -73,7 +73,7 @@ Financial Tracker is a Django-based web application designed for effective perso
 ## Installation and Setup
 
 1. Clone the repository:
-   git clone https://github.com/your-username/financial-tracker.git
+   git clone https://github.com/MikhailYablokov/Django_FinanceTracker_PetProject.git
 
 2. Navigate to the project directory:
    cd financial-tracker
