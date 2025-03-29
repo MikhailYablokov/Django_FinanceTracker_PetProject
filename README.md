@@ -6,7 +6,7 @@
 
 Финансовый Трекер - это веб-приложение на Django, разработанное для  управления личными финансами. Этот проект создан в качестве учебного опыта для углубления знаний в веб-разработке и Django.
 
-### Ключевые особенности:
+### Функции:
 
 - Система аутентификации пользователей
 - Управление финансовыми транзакциями (создание, редактирование, удаление)
@@ -53,7 +53,7 @@
 
 Financial Tracker is a Django-based web application designed for personal finance management. This project was created as a learning experience to deepen knowledge in web development and Django.
 
-### Key Features:
+### Features:
 
 - User authentication system
 - Financial transaction management (create, edit, delete)
